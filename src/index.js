@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './component/App';
-import Retrieve from './component/Retrieve';
+import Firstpage from './component/Firstpage';
 
 
 import {createStore, compose, applyMiddleware, combineReducers} from 'redux';
@@ -25,7 +25,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
         <Route path='/' component={App}>
-      </Route>
-      <Route path='ret' component={Retrieve}></Route>
+          <IndexRoute component={Firstpage} />
+        </Route>
     </Router>
 </Provider>, document.getElementById('root'));
