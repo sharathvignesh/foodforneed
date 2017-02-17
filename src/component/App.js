@@ -20,9 +20,12 @@ class App extends Component {
   render() {
 
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-          {this.props.children}
-      </MuiThemeProvider>
+      // <MuiThemeProvider muiTheme={muiTheme}>
+      //     {this.props.children}
+      // </MuiThemeProvider>
+      <div>
+        {this.props.children}
+      </div>
     );
   }
 }

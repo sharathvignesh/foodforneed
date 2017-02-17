@@ -1,5 +1,5 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
+//import AppBar from 'material-ui/AppBar';
 
 // let styles = {
 //   background: url('./../img/headerbg1.jpg')
@@ -7,10 +7,13 @@ import AppBar from 'material-ui/AppBar';
 
 export default function HeaderComponent (props) {
   return (
-    <AppBar
-    title={<center>Food for need</center>}
-    showMenuIconButton={false}
-    className='header-bg'
-    />
+
+    <div className='frontpage-banner'>
+      <div id='overlay'>
+        <div id='title'>
+          <span id="title-border">Food for Need</span>
+        </div>
+    </div>
+    </div>
   );
 };

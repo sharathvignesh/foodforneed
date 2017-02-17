@@ -10,7 +10,10 @@ class Firstpage extends Component {
 
   render() {
     return (
+      <div>
         <HeaderComponent />
+        <h3>Donate food</h3>
+      </div>
     );
   }
 }

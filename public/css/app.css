@@ -1,8 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
 body {
   margin: 0;
 }
-.header-bg{
-  background: url(./../img/headerbg1.jpeg);
+.frontpage-banner{
+
+  background-image: url(./../img/2.jpg);
   background-repeat: no-repeat;
-  background-size: 100% 100%; 
+  background-size: 100% 100%;
+  height: 390px;
+  position: relative;
+}
+
+#overlay{
+  position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: #009688;
+   opacity: 0.7;
+}
+
+/*.frontpage-banner{
+  background: #6ed3cf;
+  height: 390px;
+  position: relative;
+}*/
+
+#title{
+  left: 0;
+      position:absolute;
+      text-align:center;
+      top: 40%;
+      width: 100%
+}
+/*#title-border{
+  background: rgba(255, 255, 255, 0.58);
+  font-family: 'Comfortaa', cursive;
+  box-shadow: 0px 0px 20px 6px #1c383c;
+  font-size: 100px;
+}*/
+#title-border{
+  font-family: 'Comfortaa', cursive;
+font-size: 100px;
+color: white;
+/*background: rgb(23, 79, 107);
+padding: 0px 15px 0px 15px;*/
 }
