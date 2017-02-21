@@ -1,10 +1,10 @@
-import {STORE_NAME} from '../actions/actions';
+import {OPEN_VALUE} from '../actions/actions';
 
 
-export function name(state = '', action) {
+export function open(state = false, action) {
   switch(action.type) {
-    case STORE_NAME:
-      return action.name;
+    case OPEN_VALUE:
+      return action.open;
     default:
       return state;
   }

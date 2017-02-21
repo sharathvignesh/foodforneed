@@ -1,10 +1,10 @@
-export const STORE_NAME = 'STORE_NAME';
+export const OPEN_VALUE = 'OPEN_VALUE';
 
-export function storeName(name) {
+export function openValue(open) {
   return dispatch => {
     return dispatch({
-      type: STORE_NAME,
-      name: name
+      type: OPEN_VALUE,
+      open: open
     });
   };
 }

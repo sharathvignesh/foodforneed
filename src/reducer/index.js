@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import {name} from './reducer';
+import {open} from './reducer';
 
 const reducer = combineReducers({
-  name,
+  open,
   routing: routerReducer
 });
 
