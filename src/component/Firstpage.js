@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import {openValue} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import TextField from 'material-ui/TextField';
 
 injectTapEventPlugin();
 
@@ -47,17 +48,15 @@ class Firstpage extends Component {
       />,
     ];
 
-    const radios = [];
-    for (let i = 0; i < 30; i++) {
-      radios.push(
-        <RadioButton
-          key={i}
-          value={`value${i + 1}`}
-          label={`Option ${i + 1}`}
-          style={styles.radioButton}
-        />
-      );
-    }
+    // const radios = [];
+    //
+    //   radios.push(
+    //     <TextField
+    //     hintText="Hint Text"
+    //     floatingLabelText="Floating Label Text"
+    //   />
+    //   );
+
     return (
       <div>
         <HeaderComponent />
@@ -110,9 +109,17 @@ class Firstpage extends Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-            {radios}
-          </RadioButtonGroup>
+        <div>
+          <TextField
+             hintText="Name"
+             floatingLabelText="Enter your name"
+          />
+          <br />
+          <TextField
+             hintText=""
+             floatingLabelText="Floating Label Text"
+          />
+        </div>
         </Dialog>
       </div>
     );
