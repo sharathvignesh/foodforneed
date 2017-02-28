@@ -5,18 +5,23 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
 import {openValue} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TextField from 'material-ui/TextField';
 
+
 injectTapEventPlugin();
 
 const styles = {
-  radioButton: {
-    marginTop: 16,
+  block: {
+    maxWidth: 250,
+  },
+  checkbox: {
+    marginBottom: 16,
   },
 };
+
 
 class Firstpage extends Component {
    constructor(props){
@@ -102,7 +107,7 @@ class Firstpage extends Component {
 
 
         <Dialog
-          title="Scrollable Dialog"
+          title="Please add your info"
           actions={actions}
           modal={false}
           open={this.props.open}
@@ -110,15 +115,42 @@ class Firstpage extends Component {
           autoScrollBodyContent={true}
         >
         <div>
-          <TextField
+          <i className="material-icons">contacts</i><TextField
              hintText="Name"
              floatingLabelText="Enter your name"
+          /><br />
+        <i className="material-icons">phone_iphone</i><TextField
+             hintText="Contact number"
+             floatingLabelText="Enter your contact number"
           />
-          <br />
-          <TextField
-             hintText=""
-             floatingLabelText="Floating Label Text"
-          />
+        <br />
+        <br />
+        <span>Food Type</span>
+        <br /><br />
+        <div className='row'>
+          <div className='col-md-3'>
+           <Checkbox
+              label="Veg"
+              style={styles.checkbox}/></div>
+            <div className='col-md-3'>
+           <Checkbox
+              label="Non-Veg"
+              style={styles.checkbox}/></div>
+        </div>
+        <div className='row'>
+          <div className='col-md-3'>
+           <Checkbox
+              label="Perishable"
+              style={styles.checkbox}/></div>
+            <div className='col-md-4'>
+           <Checkbox
+              label="Non-Perishable"
+              style={styles.checkbox}/></div>
+              <div className='col-md-4'>
+           <Checkbox
+              label="other (Please specify in comments)"
+              style={styles.checkbox}/></div>
+        </div>
         </div>
         </Dialog>
       </div>
