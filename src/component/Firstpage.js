@@ -5,17 +5,23 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
 import {openValue} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import TextField from 'material-ui/TextField';
+
 
 injectTapEventPlugin();
 
 const styles = {
-  radioButton: {
-    marginTop: 16,
+  block: {
+    maxWidth: 250,
+  },
+  checkbox: {
+    marginBottom: 16,
   },
 };
+
 
 class Firstpage extends Component {
    constructor(props){
@@ -47,17 +53,15 @@ class Firstpage extends Component {
       />,
     ];
 
-    const radios = [];
-    for (let i = 0; i < 30; i++) {
-      radios.push(
-        <RadioButton
-          key={i}
-          value={`value${i + 1}`}
-          label={`Option ${i + 1}`}
-          style={styles.radioButton}
-        />
-      );
-    }
+    // const radios = [];
+    //
+    //   radios.push(
+    //     <TextField
+    //     hintText="Hint Text"
+    //     floatingLabelText="Floating Label Text"
+    //   />
+    //   );
+
     return (
       <div>
         <HeaderComponent />
@@ -103,16 +107,51 @@ class Firstpage extends Component {
 
 
         <Dialog
-          title="Scrollable Dialog"
+          title="Please add your info"
           actions={actions}
           modal={false}
           open={this.props.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-            {radios}
-          </RadioButtonGroup>
+        <div>
+          <i className="material-icons">contacts</i><TextField
+             hintText="Name"
+             floatingLabelText="Enter your name"
+          /><br />
+        <i className="material-icons">phone_iphone</i><TextField
+             hintText="Contact number"
+             floatingLabelText="Enter your contact number"
+          />
+        <br />
+        <br />
+        <span>Food Type</span>
+        <br /><br />
+        <div className='row'>
+          <div className='col-md-3'>
+           <Checkbox
+              label="Veg"
+              style={styles.checkbox}/></div>
+            <div className='col-md-3'>
+           <Checkbox
+              label="Non-Veg"
+              style={styles.checkbox}/></div>
+        </div>
+        <div className='row'>
+          <div className='col-md-3'>
+           <Checkbox
+              label="Perishable"
+              style={styles.checkbox}/></div>
+            <div className='col-md-4'>
+           <Checkbox
+              label="Non-Perishable"
+              style={styles.checkbox}/></div>
+              <div className='col-md-4'>
+           <Checkbox
+              label="other (Please specify in comments)"
+              style={styles.checkbox}/></div>
+        </div>
+        </div>
         </Dialog>
       </div>
     );

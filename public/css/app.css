@@ -3,6 +3,10 @@
 body {
   margin: 0;
 }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 hr {
     display: block;
     height: 1px;
