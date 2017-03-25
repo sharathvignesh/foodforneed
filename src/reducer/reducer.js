@@ -1,10 +1,51 @@
-import {OPEN_VALUE} from '../actions/actions';
+import {OPEN_VALUE, STORE_NAME, STORE_LOCATION, STORE_PHONE_NUMBER, STORE_DISH_NAME, STORE_DESCRIPTION} from '../actions/actions';
 
 
 export function open(state = false, action) {
   switch(action.type) {
     case OPEN_VALUE:
       return action.open;
+    default:
+      return state;
+  }
+}
+
+export function name(state = '', action) {
+  switch(action.type) {
+    case STORE_NAME:
+      return action.name;
+    default:
+      return state;
+  }
+}
+export function phonenumber(state = '', action) {
+  switch(action.type) {
+    case STORE_PHONE_NUMBER:
+      return action.phonenumber;
+    default:
+      return state;
+  }
+}
+export function location(state = '', action) {
+  switch(action.type) {
+    case STORE_LOCATION:
+      return action.location;
+    default:
+      return state;
+  }
+}
+export function dishname(state = '', action) {
+  switch(action.type) {
+    case STORE_DISH_NAME:
+      return action.dishname;
+    default:
+      return state;
+  }
+}
+export function description(state = '', action) {
+  switch(action.type) {
+    case STORE_DESCRIPTION:
+      return action.description;
     default:
       return state;
   }

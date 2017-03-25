@@ -66,9 +66,29 @@ padding: 0px 15px 0px 15px;*/
 background-repeat: no-repeat;
 padding-left: 100px;
 }
+@media only screen and (max-width: 500px) {
+  .add-icon{
+    background-position: left center;
+  background-repeat: no-repeat;
+  padding-left: 0;
+  }
+  .location-icon{
+  background-position: right center;
+  background-repeat: no-repeat;
+  }
+
+  #title-border{
+    font-family: 'Comfortaa', cursive;
+  font-size: 74px;
+  color: white;
+  /*background: rgb(23, 79, 107);
+  padding: 0px 15px 0px 15px;*/
+  }
+}
+
 .location-icon{
-  float: right;
-  padding-right: 200px;
+background-position: right center;
+background-repeat: no-repeat;
 }
 
 #donate-span{
@@ -85,4 +105,25 @@ margin-top: 4px;
 }
 .cardHead, .cardMed, .cardTex{
   font-family: 'Work Sans', sans-serif;
+}
+
+.navbarTop{
+  padding: 13px;
+  background: #e6e6e6;
+  -webkit-box-shadow:0px 1px 1px #afafaf;
+ -moz-box-shadow:0px 1px 1px #afafaf;
+ box-shadow:0px 1px 1px #afafaf;
+}
+#text_field{
+  position: relative;
+font-size: 16px;
+width: 189px;
+height: 72px;
+display: inline-block;
+line-height: 24px;
+background-color: transparent;
+font-family: Roboto, sans-serif;
+transition: height 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+cursor: auto;
+padding-left: 10px;
 }

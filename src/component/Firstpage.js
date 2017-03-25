@@ -2,11 +2,12 @@ import React, { Component,PropTypes } from 'react';
 import {connect} from 'react-redux';
 import HeaderComponent from './Header';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {grey300} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
-import {openValue} from '../actions/actions.js';
+import {openValue, storeName, storePhoneNumber, storeLocation, storeDishName, storeDescription} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TextField from 'material-ui/TextField';
 
@@ -20,6 +21,10 @@ const styles = {
   checkbox: {
     marginBottom: 16,
   },
+  text_field: {
+    width: 189,
+    paddingLeft: 11,
+  }
 };
 
 
@@ -28,6 +33,11 @@ class Firstpage extends Component {
      super(props);
      this.handleOpen = this.handleOpen.bind(this);
      this.handleClose = this.handleClose.bind(this);
+     this.storeName = this.storeName.bind(this);
+     this.storePhoneNumber = this.storePhoneNumber.bind(this);
+     this.storeLocation = this.storeLocation.bind(this);
+     this.storeDishName = this.storeDishName.bind(this);
+     this.storeDescription = this.storeDescription.bind(this);
    }
 
    handleOpen(){
@@ -36,8 +46,21 @@ class Firstpage extends Component {
    handleClose(){
      this.props.dispatch(openValue(false));
    }
-
-
+   storeName(e){
+     this.props.dispatch(storeName(e.target.value));
+   }
+   storePhoneNumber(e){
+     this.props.dispatch(storePhoneNumber(e.target.value));
+   }
+   storeLocation(e){
+     this.props.dispatch(storeLocation(e.target.value));
+   }
+   storeDishName(e){
+     this.props.dispatch(storeDishName(e.target.value));
+   }
+   storeDescription(e){
+     this.props.dispatch(storeDescription(e.target.value));
+   }
   render() {
     const actions = [
       <FlatButton
@@ -65,16 +88,15 @@ class Firstpage extends Component {
     return (
       <div>
         <HeaderComponent />
-        <br />
-        <div className='row'>
-          <div className='col-md-3'>
+        <div className='row navbarTop'>
+          <div className='col-md-3 col-xs-6'>
             <span className='add-icon'><i className="material-icons">add_circle_outline</i><span id='donate-span' onClick={this.handleOpen}>Donate food</span></span>
           </div>
-          <div className='col-md-3'>
+          <div className='col-md-3 col-xs-6'>
             <span className='location-icon'><i className="material-icons">place</i><span id='location-span'>Location</span></span>
           </div>
         </div>
-        <hr />
+        <br />
         <div className='row'>
           <div className='col-md-3'>
             <Card className='card-tex'>
@@ -115,42 +137,63 @@ class Firstpage extends Component {
           autoScrollBodyContent={true}
         >
         <div>
-          <i className="material-icons">contacts</i><TextField
+          <i className="material-icons" style={{fontSize: 17}}>contacts</i><TextField
              hintText="Name"
              floatingLabelText="Enter your name"
+             onChange={this.storeName}
+             style={styles.text_field}
           /><br />
-        <i className="material-icons">phone_iphone</i><TextField
+        <i className="material-icons" style={{fontSize: 17}}>phone_iphone</i><TextField
              hintText="Contact number"
              floatingLabelText="Enter your contact number"
+             onChange={this.storePhoneNumber}
+             style={styles.text_field}
+          /><br />
+        <i className="material-icons" style={{fontSize: 17}}>place</i><TextField
+             hintText="Location"
+             floatingLabelText="Enter your Location"
+             onChange={this.storeLocation}
+             style={styles.text_field}
           />
         <br />
         <br />
         <span>Food Type</span>
         <br /><br />
         <div className='row'>
-          <div className='col-md-3'>
+          <div className='col-md-3 col-xs-12'>
            <Checkbox
               label="Veg"
               style={styles.checkbox}/></div>
-            <div className='col-md-3'>
+            <div className='col-md-3 col-xs-12'>
            <Checkbox
               label="Non-Veg"
               style={styles.checkbox}/></div>
         </div>
         <div className='row'>
-          <div className='col-md-3'>
+          <div className='col-md-3 col-xs-12'>
            <Checkbox
               label="Perishable"
               style={styles.checkbox}/></div>
-            <div className='col-md-4'>
+            <div className='col-md-4 col-xs-12'>
            <Checkbox
               label="Non-Perishable"
               style={styles.checkbox}/></div>
-              <div className='col-md-4'>
-           <Checkbox
-              label="other (Please specify in comments)"
-              style={styles.checkbox}/></div>
         </div>
+        <img src="https://maxcdn.icons8.com/iOS7/PNG/25/Food/noodles_filled-25.png" title="Noodles Filled" width="17"/><TextField
+           hintText="Dish Name"
+           floatingLabelText="Name of the Dish"
+           onChange={this.storeDishName}
+           style={styles.text_field}
+        /><br />
+        <i className="material-icons" style={{fontSize: 17}}>question_answer</i><TextField
+           hintText="Dish Name"
+           floatingLabelText="Description"
+           rows={2}
+           multiLine={true}
+           textareaStyle={{border: '1 solid black'}}
+           onChange={this.storeDescription}
+           style={styles.text_field}
+        /><br />
         </div>
         </Dialog>
       </div>
@@ -159,9 +202,19 @@ class Firstpage extends Component {
 }
 
  Firstpage.propTypes = {
-     open: PropTypes.bool
- };
+     open: PropTypes.bool,
+     name: PropTypes.string.isRequired,
+     phonenumber: PropTypes.string.isRequired,
+     location: PropTypes.string.isRequired,
+     dishname: PropTypes.string.isRequired,
+     description: PropTypes.string.isRequired,
+   };
 
 export default connect(state => ({
-  open: state.open
+  open: state.open,
+  name: state.name,
+  phonenumber: state.phonenumber,
+  location: state.location,
+  dishname: state.dishname,
+  description: state.description
 }))(Firstpage);
