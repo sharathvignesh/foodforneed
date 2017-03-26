@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import {open, name, phonenumber, location, dishname, description} from './reducer';
+import {open, name, phonenumber, location, dishname, description, foodtype} from './reducer';
 
 const reducer = combineReducers({
   open,
@@ -9,6 +9,7 @@ const reducer = combineReducers({
   location,
   dishname,
   description,
+  foodtype,
   routing: routerReducer
 });
 

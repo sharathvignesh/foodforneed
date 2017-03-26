@@ -4,6 +4,7 @@ export const STORE_PHONE_NUMBER = 'STORE_PHONE_NUMBER';
 export const STORE_LOCATION = 'STORE_LOCATION';
 export const STORE_DISH_NAME = 'STORE_DISH_NAME';
 export const STORE_DESCRIPTION = 'STORE_DESCRIPTION';
+export const STORE_FOOD_TYPE = 'STORE_FOOD_TYPE';
 
 export function openValue(open) {
   return dispatch => {
@@ -51,6 +52,15 @@ export function storeDescription(description) {
     return dispatch({
       type: STORE_DESCRIPTION,
       description: description
+    });
+  };
+}
+export function storeFoodType(foodtype) {
+  console.log(foodtype);
+  return dispatch => {
+    return dispatch({
+      type: STORE_FOOD_TYPE,
+      foodtype: foodtype
     });
   };
 }
