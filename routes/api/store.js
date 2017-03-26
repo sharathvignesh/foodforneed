@@ -1,0 +1,32 @@
+var express = require('express');
+var app = express();
+var cors=require('cors');
+var bodyParser = require('body-parser');
+// Create application/x-www-form-urlencoded parser
+var event = require('./../../models/event');
+//import event from './../../public/models/event';
+//app.options('*', cors());
+app.use(cors());
+app.use(bodyParser.json());
+
+app.post('/', (req, res) => {
+  let name = req.body.name;
+  let phonenumber = req.body.phonenumber;
+  let location = req.body.location;
+  let foodtype = req.body.foodtype;
+  let dishname = req.body.dishname;
+  let description = req.body.description;
+
+  event.save(name, phonenumber, location, foodtype, dishname, description, (error, eventObj) => {
+    if (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+    res.json({'message': "doneee"});
+  });
+});
+
+
+
+
+app.listen(8081);
