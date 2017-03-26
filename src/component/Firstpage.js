@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
-import {openValue, storeName, storePhoneNumber, storeLocation, storeDishName, storeDescription} from '../actions/actions.js';
+import {openValue, storeName, storePhoneNumber, storeLocation, storeDishName, storeDescription, storeFoodType, storeDetails} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TextField from 'material-ui/TextField';
 
@@ -38,12 +38,14 @@ class Firstpage extends Component {
      this.storeLocation = this.storeLocation.bind(this);
      this.storeDishName = this.storeDishName.bind(this);
      this.storeDescription = this.storeDescription.bind(this);
+     this.storeFoodType = this.storeFoodType.bind(this);
    }
 
    handleOpen(){
      this.props.dispatch(openValue(true));
    }
    handleClose(){
+     this.props.dispatch(storeDetails(this.props.name, this.props.phonenumber, this.props.location, this.props.foodtype, this.props.dishname, this.props.description));
      this.props.dispatch(openValue(false));
    }
    storeName(e){
@@ -60,6 +62,9 @@ class Firstpage extends Component {
    }
    storeDescription(e){
      this.props.dispatch(storeDescription(e.target.value));
+   }
+   storeFoodType(e){
+     this.props.dispatch(storeFoodType(e.target.value));
    }
   render() {
     const actions = [
@@ -163,20 +168,28 @@ class Firstpage extends Component {
           <div className='col-md-3 col-xs-12'>
            <Checkbox
               label="Veg"
-              style={styles.checkbox}/></div>
+              value="Veg"
+              style={styles.checkbox}
+              onCheck={this.storeFoodType}/></div>
             <div className='col-md-3 col-xs-12'>
            <Checkbox
               label="Non-Veg"
-              style={styles.checkbox}/></div>
+              value="Non-Veg"
+              style={styles.checkbox}
+              onCheck={this.storeFoodType}/></div>
         </div>
         <div className='row'>
           <div className='col-md-3 col-xs-12'>
            <Checkbox
               label="Perishable"
-              style={styles.checkbox}/></div>
+              value="Perishable"
+              style={styles.checkbox}
+              onCheck={this.storeFoodType}/></div>
             <div className='col-md-4 col-xs-12'>
            <Checkbox
               label="Non-Perishable"
+              value="Non-Perishable"
+              onCheck={this.storeFoodType}
               style={styles.checkbox}/></div>
         </div>
         <img src="https://maxcdn.icons8.com/iOS7/PNG/25/Food/noodles_filled-25.png" title="Noodles Filled" width="17"/><TextField
@@ -208,6 +221,7 @@ class Firstpage extends Component {
      location: PropTypes.string.isRequired,
      dishname: PropTypes.string.isRequired,
      description: PropTypes.string.isRequired,
+     foodtype: PropTypes.array.isRequired
    };
 
 export default connect(state => ({
@@ -216,5 +230,6 @@ export default connect(state => ({
   phonenumber: state.phonenumber,
   location: state.location,
   dishname: state.dishname,
-  description: state.description
+  description: state.description,
+  foodtype: state.foodtype
 }))(Firstpage);

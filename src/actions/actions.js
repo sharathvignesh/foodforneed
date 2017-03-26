@@ -1,9 +1,11 @@
+import fetch from 'isomorphic-fetch';
 export const OPEN_VALUE = 'OPEN_VALUE';
 export const STORE_NAME = 'STORE_NAME';
 export const STORE_PHONE_NUMBER = 'STORE_PHONE_NUMBER';
 export const STORE_LOCATION = 'STORE_LOCATION';
 export const STORE_DISH_NAME = 'STORE_DISH_NAME';
 export const STORE_DESCRIPTION = 'STORE_DESCRIPTION';
+export const STORE_FOOD_TYPE = 'STORE_FOOD_TYPE';
 
 export function openValue(open) {
   return dispatch => {
@@ -51,6 +53,46 @@ export function storeDescription(description) {
     return dispatch({
       type: STORE_DESCRIPTION,
       description: description
+    });
+  };
+}
+export function storeFoodType(foodtype) {
+  return dispatch => {
+    return dispatch({
+      type: STORE_FOOD_TYPE,
+      foodtype: foodtype
+    });
+  };
+}
+
+export function storeDetails(name, phonenumber, location, foodtype, dishname, description) {
+  console.log(name);
+  console.log(phonenumber);
+  console.log(location);
+  console.log(foodtype);
+  console.log(dishname);
+  console.log(description);
+  return dispatch => {
+    return fetch('http://localhost:8081/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({'name' : name, 'phonenumber' : phonenumber, 'foodtype': foodtype, 'location': location, 'dishname': dishname, 'description': description})})
+      .then(res => {
+        if (res.status !== 200) {
+          let status = res.status;
+          console.log('error in posting event');
+        }
+        return res.json();
+      })
+      .then(console.log("saved"))
+  };
+  return dispatch => {
+    return dispatch({
+      type: OPEN_VALUE,
+      open: false
     });
   };
 }
