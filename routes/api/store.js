@@ -9,7 +9,7 @@ var event = require('./../../models/event');
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/', (req, res) => {
+app.post('/store', (req, res) => {
   let name = req.body.name;
   let phonenumber = req.body.phonenumber;
   let location = req.body.location;
@@ -28,5 +28,14 @@ app.post('/', (req, res) => {
 
 
 
+app.get('/ret', (req, res) => {
+
+  event.getDetails((err, detailsObj) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.json(detailsObj);
+  });
+});
 
 app.listen(8081);

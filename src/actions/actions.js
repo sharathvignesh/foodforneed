@@ -66,14 +66,8 @@ export function storeFoodType(foodtype) {
 }
 
 export function storeDetails(name, phonenumber, location, foodtype, dishname, description) {
-  console.log(name);
-  console.log(phonenumber);
-  console.log(location);
-  console.log(foodtype);
-  console.log(dishname);
-  console.log(description);
   return dispatch => {
-    return fetch('http://localhost:8081/', {
+    return fetch('http://localhost:8081/store', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -94,5 +88,16 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, de
       type: OPEN_VALUE,
       open: false
     });
+  };
+}
+export function fetchDetails() {
+  return dispatch => {
+    return fetch('http://localhost:8081/ret', {
+      method: 'GET'})
+      .then(res => {
+        //return res.json();
+        console.log(res.json());
+      })
+      .then(console.log("fetch"))
   };
 }

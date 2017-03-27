@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
-import {openValue, storeName, storePhoneNumber, storeLocation, storeDishName, storeDescription, storeFoodType, storeDetails} from '../actions/actions.js';
+import {openValue, storeName, storePhoneNumber, storeLocation, storeDishName, storeDescription, storeFoodType, storeDetails, fetchDetails} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TextField from 'material-ui/TextField';
 
@@ -39,8 +39,12 @@ class Firstpage extends Component {
      this.storeDishName = this.storeDishName.bind(this);
      this.storeDescription = this.storeDescription.bind(this);
      this.storeFoodType = this.storeFoodType.bind(this);
+     this.fetchDetails = this.fetchDetails.bind(this);
    }
-
+   componentDidMount(){
+     console.log("did mount");
+     this.props.dispatch(fetchDetails());
+   }
    handleOpen(){
      this.props.dispatch(openValue(true));
    }
@@ -65,6 +69,9 @@ class Firstpage extends Component {
    }
    storeFoodType(e){
      this.props.dispatch(storeFoodType(e.target.value));
+   }
+   fetchDetails(){
+     this.props.dispatch(fetchDetails());
    }
   render() {
     const actions = [

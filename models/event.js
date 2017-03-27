@@ -26,9 +26,15 @@ function save(name, phonenumber, location, foodtype, dishname, description, call
     event.save(callback);
   });
 }
+function getDetails(callback) {
+  Event.find({}, function(err, details) {
+    res.send(details);
+  });
+}
 
 
 
 module.exports = {
-  save: save
+  save: save,
+  getDetails: getDetails
 };
