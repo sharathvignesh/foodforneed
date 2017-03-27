@@ -6,6 +6,7 @@ export const STORE_LOCATION = 'STORE_LOCATION';
 export const STORE_DISH_NAME = 'STORE_DISH_NAME';
 export const STORE_DESCRIPTION = 'STORE_DESCRIPTION';
 export const STORE_FOOD_TYPE = 'STORE_FOOD_TYPE';
+export const STORE_FETCHED_DETAILS = 'STORE_FETCHED_DETAILS';
 
 export function openValue(open) {
   return dispatch => {
@@ -90,14 +91,20 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, de
     });
   };
 }
+function storeFetchedDetails(json) {
+  //console.log('coming here' + JSON.stringify(json));
+  return {
+    type: STORE_FETCHED_DETAILS,
+    json
+  }
+}
 export function fetchDetails() {
   return dispatch => {
     return fetch('http://localhost:8081/ret', {
       method: 'GET'})
       .then(res => {
-        //return res.json();
-        console.log(res.json());
+        return res.json();
       })
-      .then(console.log("fetch"))
+      .then(json => dispatch(storeFetchedDetails(json)))
   };
 }

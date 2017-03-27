@@ -40,6 +40,7 @@ class Firstpage extends Component {
      this.storeDescription = this.storeDescription.bind(this);
      this.storeFoodType = this.storeFoodType.bind(this);
      this.fetchDetails = this.fetchDetails.bind(this);
+     this.renderFetchedDetails = this.renderFetchedDetails.bind(this);
    }
    componentDidMount(){
      console.log("did mount");
@@ -73,6 +74,41 @@ class Firstpage extends Component {
    fetchDetails(){
      this.props.dispatch(fetchDetails());
    }
+   renderFetchedDetails(details) {
+     console.log("renderFetchedDetails");
+     let renderedfetcheddetails = [];
+     for (let i = 0; i < details.length; i++){
+      let detailsSet = [];
+      detailsSet.push(<Card className='card-tex'>
+        <CardHeader
+          title={details[i].name}
+          subtitle="Subtitle"
+          avatar={require('./../../public/img/1.jpg')}
+          className='cardHead'
+        />
+        <CardMedia
+          overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+          className='cardMed'
+        >
+          <img src={require('./../../public/img/2.jpg')} />
+        </CardMedia>
+        <CardTitle title="Card title" subtitle="Card subtitle" />
+        <CardText className='cardTex'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+        </CardText>
+        <CardActions>
+          <FlatButton label="Action1" />
+          <FlatButton label="Action2" />
+        </CardActions>
+      </Card>);
+      renderedfetcheddetails.push(detailsSet);
+      renderedfetcheddetails.push(<br />);
+    }
+    return renderedfetcheddetails;
+ }
   render() {
     const actions = [
       <FlatButton
@@ -111,31 +147,7 @@ class Firstpage extends Component {
         <br />
         <div className='row'>
           <div className='col-md-3'>
-            <Card className='card-tex'>
-              <CardHeader
-                title="URL Avatar"
-                subtitle="Subtitle"
-                avatar={require('./../../public/img/1.jpg')}
-                className='cardHead'
-              />
-              <CardMedia
-                overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-                className='cardMed'
-              >
-                <img src={require('./../../public/img/2.jpg')} />
-              </CardMedia>
-              <CardTitle title="Card title" subtitle="Card subtitle" />
-              <CardText className='cardTex'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-              </CardText>
-              <CardActions>
-                <FlatButton label="Action1" />
-                <FlatButton label="Action2" />
-              </CardActions>
-            </Card>
+            {this.renderFetchedDetails(this.props.fetchedObj)}
           </div>
         </div>
 
@@ -238,5 +250,6 @@ export default connect(state => ({
   location: state.location,
   dishname: state.dishname,
   description: state.description,
-  foodtype: state.foodtype
+  foodtype: state.foodtype,
+  fetchedObj: state.fetchedObj
 }))(Firstpage);
