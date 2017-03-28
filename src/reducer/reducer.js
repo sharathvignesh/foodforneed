@@ -1,4 +1,4 @@
-import {OPEN_VALUE, STORE_NAME, STORE_LOCATION, STORE_PHONE_NUMBER, STORE_DISH_NAME, STORE_DESCRIPTION, STORE_FOOD_TYPE, STORE_FETCHED_DETAILS} from '../actions/actions';
+import {OPEN_VALUE, STORE_NAME, STORE_LOCATION, STORE_PHONE_NUMBER, STORE_DISH_NAME, STORE_DESCRIPTION, STORE_FOOD_TYPE, STORE_FETCHED_DETAILS, UPDATE_VIEW} from '../actions/actions';
 
 
 export function open(state = false, action) {
@@ -63,6 +63,9 @@ export function fetchedObj(state = {}, action) {
   switch(action.type) {
     case STORE_FETCHED_DETAILS:
       return action.json;
+    case UPDATE_VIEW:
+      let newJson = [action.json]
+      return state.concat(newJson);
     default:
       return state;
   }

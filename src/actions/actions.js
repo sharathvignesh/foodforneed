@@ -7,6 +7,7 @@ export const STORE_DISH_NAME = 'STORE_DISH_NAME';
 export const STORE_DESCRIPTION = 'STORE_DESCRIPTION';
 export const STORE_FOOD_TYPE = 'STORE_FOOD_TYPE';
 export const STORE_FETCHED_DETAILS = 'STORE_FETCHED_DETAILS';
+export const UPDATE_VIEW = 'UPDATE_VIEW'
 
 export function openValue(open) {
   return dispatch => {
@@ -82,7 +83,7 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, de
         }
         return res.json();
       })
-      .then(console.log("saved"))
+      .then(json => dispatch(concatDetails(json)))
   };
   return dispatch => {
     return dispatch({
@@ -95,6 +96,13 @@ function storeFetchedDetails(json) {
   //console.log('coming here' + JSON.stringify(json));
   return {
     type: STORE_FETCHED_DETAILS,
+    json
+  }
+}
+function concatDetails(json) {
+  //console.log('coming here' + JSON.stringify(json));
+  return {
+    type: UPDATE_VIEW,
     json
   }
 }
