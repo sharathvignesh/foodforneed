@@ -212,11 +212,12 @@ class Firstpage extends Component {
            style={styles.text_field}
         /><br />
         <i className="material-icons" style={{fontSize: 17}}>question_answer</i><TextField
-           hintText="Dish Name"
-           floatingLabelText="Description"
+           hintText="Description/comments"
+           floatingLabelText="comments"
+           floatingLabelStyle={{paddingLeft: '5px'}}
            rows={2}
            multiLine={true}
-           textareaStyle={{border: '1 solid black'}}
+           textareaStyle={{border: '1px solid #d2cfcf', backgroundColor: 'whitesmoke'}}
            onChange={this.storeDescription}
            style={styles.text_field}
         /><br />
