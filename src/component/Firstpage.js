@@ -79,31 +79,27 @@ class Firstpage extends Component {
      let renderedfetcheddetails = [];
      for (let i = 0; i < details.length; i++){
       let detailsSet = [];
-      detailsSet.push(<Card className='card-tex'>
+      detailsSet.push(<div className='col-md-3 col-sm-4 col-xs-12'><Card className='card-tex'>
         <CardHeader
           title={details[i].name}
-          subtitle="Subtitle"
+          subtitle={details[i].location}
           avatar={require('./../../public/img/1.jpg')}
           className='cardHead'
         />
         <CardMedia
-          overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
           className='cardMed'
         >
-          <img src={require('./../../public/img/2.jpg')} />
+          <img src={require('./../../public/img/food.jpeg')} />
         </CardMedia>
-        <CardTitle title="Card title" subtitle="Card subtitle" />
+        <CardTitle className='dishName' title={details[i].dishname} />
         <CardText className='cardTex'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+          {details[i].description}
         </CardText>
-        <CardActions>
-          <FlatButton label="Action1" />
-          <FlatButton label="Action2" />
-        </CardActions>
-      </Card>);
+          <CardText className='cardTex'>
+            <i className="material-icons">settings_phone</i>
+            <div className="phoneNumber">{details[i].phonenumber}</div>
+          </CardText>
+      </Card></div>);
       renderedfetcheddetails.push(detailsSet);
       renderedfetcheddetails.push(<br />);
     }
@@ -146,9 +142,7 @@ class Firstpage extends Component {
         </div>
         <br />
         <div className='row'>
-          <div className='col-md-3'>
             {this.renderFetchedDetails(this.props.fetchedObj)}
-          </div>
         </div>
 
 
