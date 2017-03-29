@@ -10,6 +10,6 @@ The best use case is, say Mr.x is organizing a party in his office. At the end o
 1) Clone the app.
 2) npm Install
 3) run mongodb and create a database named "foodforneed"
-4) cd foodforneed/routes/api and node store.js
-5) cd foodforneed and npm start
+4) cd foodforneed/routes/api and run the command "node server.js"
+5) cd foodforneed and run the command "npm start"
 6) Now in the web browser go to localhost:3000
