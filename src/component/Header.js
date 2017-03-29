@@ -11,7 +11,8 @@ export default function HeaderComponent (props) {
     <div className='frontpage-banner'>
       <div id='overlay'>
         <div id='title'>
-          <span id="title-border">Food for Need</span>
+          <span id="title-border">Food for Need</span><br />
+          <span id='teresa'>"If you can't feed a hundred people, then feed just one." - Mother Teresa</span>
         </div>
     </div>
     </div>
