@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
-import {openValue, storeName, storePhoneNumber, storeLocation, storeDishName, storeDescription, storeFoodType, storeDetails, fetchDetails} from '../actions/actions.js';
+import {storeFoodType, storeDetails, fetchDetails} from '../actions/actions.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TextField from 'material-ui/TextField';
 
@@ -41,45 +41,69 @@ class Firstpage extends Component {
      this.storeFoodType = this.storeFoodType.bind(this);
      this.fetchDetails = this.fetchDetails.bind(this);
      this.renderFetchedDetails = this.renderFetchedDetails.bind(this);
+     this.formSubmit = this.formSubmit.bind(this);
+     this.imgURL = this.imgURL.bind(this);
+
+     this.state = {
+       open: false,
+       name: "",
+       phonenumber: "",
+       location: "",
+       dishname: "",
+       description: "",
+       imgurl: ""
+     }
    }
+
    componentDidMount(){
      console.log("did mount");
      this.props.dispatch(fetchDetails());
    }
    handleOpen(){
-     this.props.dispatch(openValue(true));
+     console.log("handleopen");
+
+     this.setState({open : true});
    }
    handleClose(){
-     this.props.dispatch(storeDetails(this.props.name, this.props.phonenumber, this.props.location, this.props.foodtype, this.props.dishname, this.props.description));
-     this.props.dispatch(openValue(false));
+     this.setState({open : false});
    }
    storeName(e){
-     this.props.dispatch(storeName(e.target.value));
+     this.setState({name: e.target.value});
    }
    storePhoneNumber(e){
-     this.props.dispatch(storePhoneNumber(e.target.value));
+     this.setState({phonenumber: e.target.value});
    }
    storeLocation(e){
-     this.props.dispatch(storeLocation(e.target.value));
+     this.setState({location: e.target.value});
+
    }
    storeDishName(e){
-     this.props.dispatch(storeDishName(e.target.value));
+     this.setState({dishname: e.target.value});
    }
    storeDescription(e){
-     this.props.dispatch(storeDescription(e.target.value));
+     this.setState({description: e.target.value});
+
    }
    storeFoodType(e){
      this.props.dispatch(storeFoodType(e.target.value));
    }
+   imgURL(e){
+     this.setState({imgurl: e.target.value});
+   }
    fetchDetails(){
      this.props.dispatch(fetchDetails());
    }
+   formSubmit(){
+     this.props.dispatch(storeDetails(this.state.name, this.state.phonenumber, this.state.location, this.props.foodtype, this.state.dishname, this.state.imgurl, this.state.description));
+     this.setState({open: false});
+   }
    renderFetchedDetails(details) {
-     console.log("renderFetchedDetails");
+     if(details.length !== 0){
+     console.log("not empty");
      let renderedfetcheddetails = [];
      for (let i = 0; i < details.length; i++){
       let detailsSet = [];
-      detailsSet.push(<div className='col-md-3 col-sm-4 col-xs-12'><Card className='card-tex'>
+      detailsSet.push(<div className='col-md-3 col-sm-4 col-xs-12'><Card className='card-tex' style={{background: 'linear-gradient(#e6e6e6, white)'}}>
         <CardHeader
           title={details[i].name}
           subtitle={details[i].location}
@@ -89,9 +113,10 @@ class Firstpage extends Component {
         <CardMedia
           className='cardMed'
         >
-          <img src={require('./../../public/img/food.jpeg')} />
+          <img src={details[i].imgurl} className='dishPhoto'/>
         </CardMedia>
-        <CardTitle className='dishName' title={details[i].dishname} />
+        <img id='ricebowl' src={require('./../../public/img/rice.png')} />
+        <CardTitle title={details[i].dishname} style={{fontWeight: 200, paddinRight: 0, paddingBottom: 2, paddingTop: 17, position: 'relative', paddingLeft: 58}}/>
         <CardText className='cardTex'>
           {details[i].description}
         </CardText>
@@ -104,6 +129,14 @@ class Firstpage extends Component {
       renderedfetcheddetails.push(<br />);
     }
     return renderedfetcheddetails;
+  }
+  else if(details.length === 0){
+    return(
+    <div id='firsttodonate'>
+        Be the first to donate :)
+    </div>
+    )
+  }
  }
   render() {
     const actions = [
@@ -116,7 +149,7 @@ class Firstpage extends Component {
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.formSubmit}
       />,
     ];
 
@@ -141,7 +174,7 @@ class Firstpage extends Component {
           </div>
         </div>
         <br />
-        <div className='row'>
+        <div className='row' style={{padding: 20}}>
             {this.renderFetchedDetails(this.props.fetchedObj)}
         </div>
 
@@ -150,9 +183,10 @@ class Firstpage extends Component {
           title="Please add your info"
           actions={actions}
           modal={false}
-          open={this.props.open}
+          open={this.state.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
+          titleStyle={{fontWeight: 100}}
         >
         <div>
           <i className="material-icons" style={{fontSize: 17}}>contacts</i><TextField
@@ -211,6 +245,12 @@ class Firstpage extends Component {
            onChange={this.storeDishName}
            style={styles.text_field}
         /><br />
+      <img src="https://maxcdn.icons8.com/iOS7/PNG/25/Messaging/add_link-25.png" title="Add Link" width="17" /><TextField
+           hintText="URL of the photo"
+           floatingLabelText="Photo of the Dish"
+           onChange={this.imgURL}
+           style={styles.text_field}
+        /><br />
         <i className="material-icons" style={{fontSize: 17}}>question_answer</i><TextField
            hintText="Description/comments"
            floatingLabelText="comments"
@@ -235,7 +275,8 @@ class Firstpage extends Component {
      location: PropTypes.string.isRequired,
      dishname: PropTypes.string.isRequired,
      description: PropTypes.string.isRequired,
-     foodtype: PropTypes.array.isRequired
+     foodtype: PropTypes.array.isRequired,
+     imgurl: PropTypes.string.isRequired
    };
 
 export default connect(state => ({
@@ -246,5 +287,6 @@ export default connect(state => ({
   dishname: state.dishname,
   description: state.description,
   foodtype: state.foodtype,
-  fetchedObj: state.fetchedObj
+  fetchedObj: state.fetchedObj,
+  imgurl: state.imgurl
 }))(Firstpage);
