@@ -15,9 +15,10 @@ app.post('/store', (req, res) => {
   let location = req.body.location;
   let foodtype = req.body.foodtype;
   let dishname = req.body.dishname;
+  let imgurl = req.body.imgurl;
   let description = req.body.description;
 
-  event.save(name, phonenumber, location, foodtype, dishname, description, (error, eventObj) => {
+  event.save(name, phonenumber, location, foodtype, dishname, imgurl, description, (error, eventObj) => {
     if (error) {
           console.log(error);
           return res.status(500).send(error);

@@ -7,7 +7,8 @@ export const STORE_DISH_NAME = 'STORE_DISH_NAME';
 export const STORE_DESCRIPTION = 'STORE_DESCRIPTION';
 export const STORE_FOOD_TYPE = 'STORE_FOOD_TYPE';
 export const STORE_FETCHED_DETAILS = 'STORE_FETCHED_DETAILS';
-export const UPDATE_VIEW = 'UPDATE_VIEW'
+export const UPDATE_VIEW = 'UPDATE_VIEW';
+export const STORE_IMG_URL = 'STORE_IMG_URL';
 
 export function openValue(open) {
   return dispatch => {
@@ -66,8 +67,16 @@ export function storeFoodType(foodtype) {
     });
   };
 }
+export function storeImgURL(url) {
+  return dispatch => {
+    return dispatch({
+      type: STORE_IMG_URL,
+      url: url
+    });
+  };
+}
 
-export function storeDetails(name, phonenumber, location, foodtype, dishname, description) {
+export function storeDetails(name, phonenumber, location, foodtype, dishname, imgurl, description) {
   return dispatch => {
     return fetch('http://localhost:8081/store', {
       method: 'POST',
@@ -75,7 +84,7 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, de
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({'name' : name, 'phonenumber' : phonenumber, 'foodtype': foodtype, 'location': location, 'dishname': dishname, 'description': description})})
+      body: JSON.stringify({'name' : name, 'phonenumber' : phonenumber, 'foodtype': foodtype, 'location': location, 'dishname': dishname, 'imgurl': imgurl, 'description': description})})
       .then(res => {
         if (res.status !== 200) {
           let status = res.status;

@@ -1,4 +1,4 @@
-import {OPEN_VALUE, STORE_NAME, STORE_LOCATION, STORE_PHONE_NUMBER, STORE_DISH_NAME, STORE_DESCRIPTION, STORE_FOOD_TYPE, STORE_FETCHED_DETAILS, UPDATE_VIEW} from '../actions/actions';
+import {OPEN_VALUE, STORE_NAME, STORE_LOCATION, STORE_PHONE_NUMBER, STORE_DISH_NAME, STORE_DESCRIPTION, STORE_FOOD_TYPE, STORE_FETCHED_DETAILS, UPDATE_VIEW, STORE_IMG_URL} from '../actions/actions';
 
 
 export function open(state = false, action) {
@@ -14,6 +14,14 @@ export function name(state = '', action) {
   switch(action.type) {
     case STORE_NAME:
       return action.name;
+    default:
+      return state;
+  }
+}
+export function imgurl(state = '', action) {
+  switch(action.type) {
+    case STORE_IMG_URL:
+      return action.url;
     default:
       return state;
   }
