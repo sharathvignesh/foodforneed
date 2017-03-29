@@ -85,6 +85,7 @@ padding: 16px;
 margin-top: 4px;
     padding-left: 5px;
     font-family: 'Work Sans', sans-serif;
+        cursor: pointer;
 }
 #location-span{
   position: absolute;
@@ -143,16 +144,13 @@ padding-top: 2px;
   margin-top: 33px;
   text-shadow: 1px 1px 3px #b3b0b0;
 }
+.cardpadTop{
+  margin-top: 27px;
+}
 @media only screen and (max-width: 500px) {
   .add-icon{
     background-position: left center;
   background-repeat: no-repeat;
-  padding-left: 0;
-  }
-  .location-icon{
-  background-position: right center;
-  background-repeat: no-repeat;
-  margin-left: 20px;
   }
 
   #title-border{
@@ -168,5 +166,8 @@ padding-top: 2px;
     font-weight: 100;
     font-size: 31px;
     margin-top: 28px;
+  }
+  .cardpadTop{
+    margin-top: 27px;
   }
 }

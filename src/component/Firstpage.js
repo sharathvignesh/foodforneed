@@ -103,7 +103,7 @@ class Firstpage extends Component {
      let renderedfetcheddetails = [];
      for (let i = 0; i < details.length; i++){
       let detailsSet = [];
-      detailsSet.push(<div className='col-md-3 col-sm-4 col-xs-12'><Card className='card-tex' style={{background: 'linear-gradient(#e6e6e6, white)'}}>
+      detailsSet.push(<div className='col-md-3 col-sm-4 col-xs-12 cardpadTop' style={{paddingTop: 0}}><Card className='card-tex' style={{background: 'linear-gradient(#e6e6e6, white)'}}>
         <CardHeader
           title={details[i].name}
           subtitle={details[i].location}
@@ -166,11 +166,8 @@ class Firstpage extends Component {
       <div>
         <HeaderComponent />
         <div className='row navbarTop'>
-          <div className='col-md-3 col-xs-6'>
+          <div className='col-md-12 col-xs-12'>
             <span className='add-icon'><i className="material-icons">add_circle_outline</i><span id='donate-span' onClick={this.handleOpen}>Donate food</span></span>
-          </div>
-          <div className='col-md-3 col-xs-6'>
-            <span className='location-icon'><i className="material-icons">place</i><span id='location-span'>Location</span></span>
           </div>
         </div>
         <br />
