@@ -1,15 +1,24 @@
-var express = require('express');
-//var app = express();
-const app = require('../app');
+
+// server/app.js
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
 var cors=require('cors');
 var bodyParser = require('body-parser');
-// Create application/x-www-form-urlencoded parser
-var event = require('./../../models/event');
-//import event from './../../public/models/event';
-//app.options('*', cors());
+
+const app = express();
+var event = require('../models/event');
+// Setup logger
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 app.use(cors());
 app.use(bodyParser.json());
-const PORT = process.env.PORT || 9000;
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+// Always return the main index.html, so react-router render the route in the client
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});
 app.post('/store', (req, res) => {
   let name = req.body.name;
   let phonenumber = req.body.phonenumber;
@@ -39,7 +48,4 @@ app.get('/ret', (req, res) => {
     res.json(detailsObj);
   });
 });
-
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
-});
+module.exports = app;
