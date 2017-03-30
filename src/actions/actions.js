@@ -78,7 +78,7 @@ export function storeImgURL(url) {
 
 export function storeDetails(name, phonenumber, location, foodtype, dishname, imgurl, description) {
   return dispatch => {
-    return fetch('http://localhost:9000/store', {
+    return fetch('/store', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
