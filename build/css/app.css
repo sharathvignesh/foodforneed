@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+body {
+  margin: 0;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.frontpage-banner{
+
+  background-image: url(./../img/2.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 390px;
+  position: relative;
+}
+
+#overlay{
+  position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: #0a7168;
+   opacity: 0.7;
+}
+
+/*.frontpage-banner{
+  background: #6ed3cf;
+  height: 390px;
+  position: relative;
+}*/
+
+#title{
+  left: 0;
+      position:absolute;
+      text-align:center;
+      top: 40%;
+      width: 100%
+}
+/*#title-border{
+  background: rgba(255, 255, 255, 0.58);
+  font-family: 'Comfortaa', cursive;
+  box-shadow: 0px 0px 20px 6px #1c383c;
+  font-size: 100px;
+}*/
+#title-border{
+  font-family: 'Comfortaa', cursive;
+font-size: 100px;
+color: white;
+text-shadow: 1px 1px 2px #000000;
+
+/*background: rgb(23, 79, 107);
+padding: 0px 15px 0px 15px;*/
+}
+
+.add-icon{
+  background-position: left center;
+background-repeat: no-repeat;
+padding-left: 100px;
+}
+
+.location-icon{
+background-position: right center;
+background-repeat: no-repeat;
+    margin-left: 40px;
+}
+#ricebowl{
+position: absolute;
+height: 30px;
+padding: 16px;
+}
+.dishPhoto{
+  height : 265px;
+}
+#donate-span{
+  position: absolute;
+margin-top: 4px;
+    padding-left: 5px;
+    font-family: 'Work Sans', sans-serif;
+        cursor: pointer;
+}
+#teresa{
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  color: white;
+  font-weight: 100;
+  text-shadow: 2px 2px 3px #000000;
+}
+#location-span{
+  position: absolute;
+margin-top: 4px;
+    padding-left: 5px;
+    font-family: 'Work Sans', sans-serif;
+}
+.cardHead, .cardMed, .cardTex, .cardPhoneNumber, .dishName{
+  font-family: Roboto, sans-serif;
+}
+.dishName{
+  font-weight: 200;
+  padding: 16px;
+ position: relative;
+ padding-left: 6px;
+}
+.cardTex{
+  font-weight: 100;
+  text-shadow: 1px 1px 1px #efecec;
+  }
+
+.navbarTop{
+  padding: 13px;
+  background: #e6e6e6;
+  -webkit-box-shadow:0px 1px 1px #afafaf;
+ -moz-box-shadow:0px 1px 1px #afafaf;
+ box-shadow:0px 1px 1px #afafaf;
+}
+#text_field{
+  position: relative;
+font-size: 16px;
+width: 189px;
+height: 72px;
+display: inline-block;
+line-height: 24px;
+background-color: transparent;
+font-family: Roboto, sans-serif;
+transition: height 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+cursor: auto;
+padding-left: 10px;
+}
+.phoneNumber{
+font-size: 17px;
+display: initial;
+position: absolute;
+padding-left: 13px;
+padding-top: 2px;
+
+}
+
+#firsttodonate{
+  margin: 0 auto;
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+  font-size: 45px;
+  margin-top: 33px;
+  text-shadow: 1px 1px 3px #b3b0b0;
+}
+.cardpadTop{
+  margin-top: 27px;
+}
+@media only screen and (max-width: 500px) {
+  .add-icon{
+    background-position: left center;
+  background-repeat: no-repeat;
+  }
+  #title{
+    left: 0;
+        position:absolute;
+        text-align:center;
+        top: 41%;
+        width: 100%
+  }
+
+  #title-border{
+  font-family: 'Comfortaa', cursive;
+  font-size: 52px;
+  color: white;
+  /*background: rgb(23, 79, 107);
+  padding: 0px 15px 0px 15px;*/
+  }
+  #firsttodonate{
+    margin: 0 auto;
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    font-size: 31px;
+    margin-top: 28px;
+  }
+  .cardpadTop{
+    margin-top: 27px;
+  }
+}
+@media only screen and (max-width: 375px) {
+\
+  #title{
+    left: 0;
+        position:absolute;
+        text-align:center;
+        top: 41%;
+        width: 100%
+  }
+
+  #title-border{
+  font-family: 'Comfortaa', cursive;
+  font-size: 46px;
+  color: white;
+  /*background: rgb(23, 79, 107);
+  padding: 0px 15px 0px 15px;*/
+  }
+
+}
