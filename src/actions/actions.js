@@ -117,7 +117,7 @@ function concatDetails(json) {
 }
 export function fetchDetails() {
   return dispatch => {
-    return fetch('http://localhost:9000/ret', {
+    return fetch('/ret', {
       method: 'GET'})
       .then(res => {
         return res.json();
