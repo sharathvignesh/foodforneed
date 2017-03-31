@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 const app = express();
 var event = require('../models/event');
 // Setup logger
-
+app.use(cors());
 app.use(bodyParser.json());
 // Serve static assets
 

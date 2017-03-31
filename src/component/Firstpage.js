@@ -177,7 +177,7 @@ class Firstpage extends Component {
 
 
         <Dialog
-          title="Please add your info"
+          title="Please add the following info"
           actions={actions}
           modal={false}
           open={this.state.open}
