@@ -153,6 +153,24 @@ padding-top: 2px;
   margin-top: 33px;
   text-shadow: 1px 1px 3px #b3b0b0;
 }
+#firsttodonate{
+  margin: 0 auto;
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+  font-size: 30px;
+  margin-top: 33px;
+  text-shadow: 1px 1px 3px #b3b0b0;
+  padding: 0px 30px 0px 30px;
+}
+#intro{
+  margin: 0 auto;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  font-size: 25px;
+  margin-top: 33px;
+  text-shadow: 1px 1px 3px #b3b0b0;
+  padding: 0px 30px 0px 30px;
+}
 .cardpadTop{
   margin-top: 27px;
 }
@@ -180,11 +198,21 @@ padding-top: 2px;
     margin: 0 auto;
     font-family: Roboto, sans-serif;
     font-weight: 100;
-    font-size: 31px;
+    font-size: 20px;
     margin-top: 28px;
+    padding-left: 11px;
   }
   .cardpadTop{
     margin-top: 27px;
+  }
+  #intro{
+    margin: 0 auto;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    margin-top: 33px;
+    text-shadow: 1px 1px 3px #b3b0b0;
+    padding: 0px 30px 0px 30px;
   }
 }
 @media only screen and (max-width: 375px) {
@@ -203,6 +231,14 @@ padding-top: 2px;
   color: white;
   /*background: rgb(23, 79, 107);
   padding: 0px 15px 0px 15px;*/
+  }
+  #firsttodonate{
+    margin: 0 auto;
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+
+    padding-left: 11px;
   }
 
 }

@@ -43,7 +43,7 @@ class Firstpage extends Component {
      this.renderFetchedDetails = this.renderFetchedDetails.bind(this);
      this.formSubmit = this.formSubmit.bind(this);
      this.imgURL = this.imgURL.bind(this);
-
+     this.renderIntro = this.renderIntro.bind(this);
      this.state = {
        open: false,
        name: "",
@@ -97,13 +97,25 @@ class Firstpage extends Component {
      this.props.dispatch(storeDetails(this.state.name, this.state.phonenumber, this.state.location, this.props.foodtype, this.state.dishname, this.state.imgurl, this.state.description));
      this.setState({open: false});
    }
+   renderIntro(details){
+     if(details.length !==0){
+       return(
+         <div className='row'>
+           <div id='intro'>
+               Have excess food ? Click the donate button above right away to donate food!
+           </div>
+         </div>
+       );
+     }
+   }
    renderFetchedDetails(details) {
      if(details.length !== 0){
      console.log("not empty");
      let renderedfetcheddetails = [];
      for (let i = 0; i < details.length; i++){
       let detailsSet = [];
-      detailsSet.push(<div className='col-md-3 col-sm-4 col-xs-12 cardpadTop' style={{paddingTop: 0}}><Card className='card-tex' style={{background: 'linear-gradient(#e6e6e6, white)'}}>
+      detailsSet.push(
+        <div className='col-md-3 col-sm-4 col-xs-12 cardpadTop' style={{paddingTop: 0}}><Card className='card-tex' style={{background: 'linear-gradient(#e6e6e6, white)'}}>
         <CardHeader
           title={details[i].name}
           subtitle={details[i].location}
@@ -133,7 +145,7 @@ class Firstpage extends Component {
   else if(details.length === 0){
     return(
     <div id='firsttodonate'>
-        Be the first to donate :)
+        Be the first to donate :) Click the donate button above right away to donate food!
     </div>
     )
   }
@@ -171,6 +183,9 @@ class Firstpage extends Component {
           </div>
         </div>
         <br />
+        {this.renderIntro(this.props.fetchedObj)}
+        <div>
+        </div>
         <div className='row' style={{padding: 20}}>
             {this.renderFetchedDetails(this.props.fetchedObj)}
         </div>
