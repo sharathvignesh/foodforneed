@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://sharath:renade@ds145800.mlab.com:45800/heroku_vtn7562l';
+//var mongoDB = 'mongodb://sharath:renade@ds145800.mlab.com:45800/heroku_vtn7562l';
+var mongoDB = 'mongodb://127.0.0.1/foodforneed';
 var Schema = mongoose.Schema;
 mongoose.connect(mongoDB);
 
