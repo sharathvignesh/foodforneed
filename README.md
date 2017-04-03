@@ -8,8 +8,17 @@ The best use case is, say Mr.x is organizing a party in his office. At the end o
 
 ### Installation & Usage:
 1) Clone the app.
-2) npm Install
-3) run mongodb and create a database named "foodforneed"
-4) cd server and run the command "node index.js"
-5) cd foodforneed and run the command "npm run dev"
-6) Now in the web browser go to localhost:3000
+2) Install the dependencies
+```
+cd foodforneed && npm install
+```
+3) Run mongodb and create a database named **"foodforneed"**
+4) Run ther server
+```
+cd server && node index.js
+```
+5) Run the react app
+```
+npm run dev
+```
+6) Now in the web browser go to **localhost:3000**
