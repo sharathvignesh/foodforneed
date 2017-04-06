@@ -293,12 +293,6 @@ class Firstpage extends Component {
 
 export default connect(state => ({
   open: state.open,
-  name: state.name,
-  phonenumber: state.phonenumber,
-  location: state.location,
-  dishname: state.dishname,
-  description: state.description,
   foodtype: state.foodtype,
-  fetchedObj: state.fetchedObj,
-  imgurl: state.imgurl
+  fetchedObj: state.fetchedObj
 }))(Firstpage);
