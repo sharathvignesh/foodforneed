@@ -25,14 +25,45 @@ export function storeFoodType(foodtype) {
 
 export function storeDetails(name, phonenumber, location, foodtype, dishname, imgurl, description) {
   return dispatch => {
-    return fetch('http://localhost:9000/store', {
+    return fetch('/graphql', {
   //    return fetch('/store', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({'name' : name, 'phonenumber' : phonenumber, 'foodtype': foodtype, 'location': location, 'dishname': dishname, 'imgurl': imgurl, 'description': description})})
+      body: JSON.stringify({
+        'query': `
+        mutation storeDonorDetails(
+          $name: String!,
+          $phonenumber: String!,
+          $location: String!,
+          $foodtype: [String]!,
+          $dishname: String!,
+          $imgurl: String!,
+          $description: String!
+        ) {
+          storeDonorDetails(
+            name: $name,
+            phonenumber: $phonenumber,
+            location: $location,
+            foodtype: $foodtype,
+            dishname: $dishname,
+            imgurl: $imgurl,
+            description: $description
+          )
+        }
+        `,
+        "variables": {
+          "name": name,
+          "phonenumber": phonenumber,
+          "location": location,
+          "foodtype": foodtype,
+          "dishname": dishname,
+          "imgurl": imgurl,
+          "description": description
+        }
+      })})
       .then(res => {
         if (res.status !== 200) {
           let status = res.status;
