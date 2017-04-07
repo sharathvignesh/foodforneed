@@ -80,6 +80,8 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, im
     });
   };
 }
+
+
 function storeFetchedDetails(json) {
   //console.log('coming here' + JSON.stringify(json));
   return {

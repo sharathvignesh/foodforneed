@@ -1,78 +1,68 @@
 import {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLInputObjectType,
+  GraphQLInt,
   GraphQLString,
-  GraphQLFloat,
-  GraphQLNonNull,
   GraphQLList,
+  GraphQLNonNull,
   GraphQLID,
-  GraphQLScalarType
+  GraphQLBoolean,
+  GraphQLFloat
 } from 'graphql';
-import { GraphQLError } from 'graphql/error';
-import { Kind } from 'graphql/language';
 
 import {
-  save,
   getDetails
-} from './models/event';
-
-
+} from './../models/event';
 
 const Details = new GraphQLObjectType({
   name: 'Details',
   fields: () => ({
     name: {type: GraphQLString},
     phonenumber: {type: GraphQLString},
-    location: {type: Location},
-    foodtype: {type: new GraphQLList(GraphQLString)},
+    location: {type: GraphQLString},
     dishname: {type: GraphQLString},
     imgurl: {type: GraphQLString},
-    description: {type: GraphQLString}
+    description: {type: GraphQLString},
+    foodtype: {type: new GraphQLList(GraphQLString)}
   })
 });
-//
-// const Query = new GraphQLObjectType({
-//   name: 'RootQueryType',
-//   fields: {
-//     event: {
-//       type: Event,
-//       description: 'Get event details',
-//       args: {
-//         eventId: {type: new GraphQLNonNull(GraphQLString)}
-//       },
-//       resolve(value, args) {
-//         return fetchEvent(args.eventId);
-//       }
-//     }
-//   }
-// });
 
-const Mutation = new GraphQLObjectType({
-  name: 'RootMutationType',
-  fields: {
-    storeDonorDetails: {
-      type: Details,
-      description: 'Add donor details',
+const query = new GraphQLObjectType({
+  name: "Query",
+  description: "First GraphQL Server Config - Yay!",
+  fields: () => ({
+    hello: {
+      type: GraphQLString,
+      description: "Accepts a name so you can be nice and say hi",
       args: {
-        name: {type: new GraphQLNonNull(GraphQLString)},
-        phonenumber: {type: new GraphQLNonNull(GraphQLString)},
-        location: {type: LocationInput},
-        foodtype: {type: new GraphQLNonNull(new GraphQLList(GraphQLString))},
-        dishname: {type: new GraphQLNonNull(GraphQLString)},
-        imgurl: {type: new GraphQLNonNull(GraphQLString)},
-        description: {type: new GraphQLNonNull(GraphQLString)},
+        name: {
+          type: new GraphQLNonNull(GraphQLString),
+          description: "Name you want to say hi to :)",
+        }
       },
-      resolve(source, args) {
-        return save(args);
+      resolve: (_,args) => {
+        return `Hello, ${args.name}!!!`;
+      }
+    },
+    luckyNumber: {
+      type: GraphQLInt,
+      description: "A lucky number",
+      resolve: () => {
+        return 888;
+      }
+    },
+    fetchDonorDetails: {
+      type: Details,
+      description: 'Get Donor details',
+      resolve() {
+        return getDetails();
       }
     }
-  }
+  })
 });
 
-const Schema = new GraphQLSchema({
-  //query: Query,
-  mutation: Mutation
+const schema = new GraphQLSchema({
+  query
 });
 
-export default Schema;
+export default schema;

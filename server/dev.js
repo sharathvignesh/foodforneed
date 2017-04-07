@@ -1,13 +1,14 @@
 
 // server/app.js
-const express = require('express');
-
+import express from 'express';
 const path = require('path');
-var cors=require('cors');
+import GraphQLHTTP from 'express-graphql';
+import schema from './../graphql/schema';
+var cors = require('cors');
 var bodyParser = require('body-parser');
 
 const app = express();
-var event = require('../models/event');
+var event = require('./../models/event');
 // Setup logger
 app.use(cors());
 app.use(bodyParser.json());
@@ -45,4 +46,11 @@ app.get('/ret', (req, res) => {
     res.json(detailsObj);
   });
 });
+
+app.use('/GraphQL', GraphQLHTTP({
+    schema,
+    graphiql: true
+  })
+);
+
 module.exports = app;
