@@ -29,10 +29,7 @@ function save(name, phonenumber, location, foodtype, dishname, imgurl, descripti
   });
 }
 function getDetails(callback) {
-  console.log("getdetiasadada");
-  Event.find({}, function(detailsObj){
-    console.log(detailsObj);
-  });
+  Event.find({}, callback);
 }
 
 

@@ -19,11 +19,11 @@ const Details = new GraphQLObjectType({
   fields: () => ({
     name: {type: GraphQLString},
     phonenumber: {type: GraphQLString},
+    foodtype: {type: new GraphQLList(GraphQLString)},
     location: {type: GraphQLString},
     dishname: {type: GraphQLString},
     imgurl: {type: GraphQLString},
-    description: {type: GraphQLString},
-    foodtype: {type: new GraphQLList(GraphQLString)}
+    description: {type: GraphQLString}
   })
 });
 
@@ -52,10 +52,16 @@ const query = new GraphQLObjectType({
       }
     },
     fetchDonorDetails: {
-      type: Details,
+      type: new GraphQLList(Details),
       description: 'Get Donor details',
-      resolve() {
-        return getDetails();
+      resolve: () => {
+        //console.log(getDetails());
+        return (getDetails((err, detailsObj) => {
+          if (err) {
+            return res.status(500).send(err);
+          }
+          return detailsObj;
+        }));
       }
     }
   })
