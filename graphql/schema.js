@@ -56,12 +56,12 @@ const query = new GraphQLObjectType({
       description: 'Get Donor details',
       resolve: () => {
         //console.log(getDetails());
-        return (getDetails((err, detailsObj) => {
+        getDetails((err, detailsObj) => {
           if (err) {
             return res.status(500).send(err);
           }
           return detailsObj;
-        }));
+        });
       }
     }
   })
