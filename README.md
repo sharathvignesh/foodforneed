@@ -13,9 +13,9 @@ The best use case is, say Mr.x is organizing a party in his office. At the end o
 cd foodforneed && npm install
 ```
 3) Run mongodb and create a database named **"foodforneed"**
-4) Run ther server
+4) Run the server
 ```
-cd server && node index.js
+npm start
 ```
 5) Run the react app
 ```

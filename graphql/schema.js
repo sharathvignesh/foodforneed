@@ -13,6 +13,7 @@ import {
 import {
   getDetails
 } from './../models/event';
+
 //
 // const Details = new GraphQLObjectType({
 //   name: 'Details',
@@ -30,7 +31,6 @@ import {
 const Details = new GraphQLObjectType({
   name: 'Details',
   fields: {
-    _id: {type: GraphQLString},
     name: {type: GraphQLString},
     phonenumber: {type: GraphQLString},
     location: {type: GraphQLString},
@@ -45,8 +45,7 @@ const Details = new GraphQLObjectType({
 const testdata = new GraphQLObjectType({
   name: 'testdata',
   fields: () => ({
-    name: {type: GraphQLString},
-    std: {type: GraphQLString}
+    name: {type: GraphQLString}
   })
 });
 
@@ -78,19 +77,20 @@ const query = new GraphQLObjectType({
       type: new GraphQLList(Details),
       description: 'Get Donor details',
       resolve: () => {
-        getDetails((err, detailsObj) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-          console.log(detailsObj);
-          return detailsObj;
-        });
+        // response = getDetails((err, detailsObj) => {
+        //   if (err) {
+        //     return res.status(500).send(err);
+        //   }
+        //   response = detailsObj;
+        // });
+        //console.log(response);
+        return getDetails();
       }
     },
     test: {
-      type: testdata,
+      type: new GraphQLList(testdata),
       resolve: () => {
-        return {"name": "sharath", "std": "qwe"}
+        return [{name: "sharath", std: "qwe"},{name: "al", std: "behappy"}]
       }
     }
   })
