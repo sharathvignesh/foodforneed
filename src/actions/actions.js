@@ -96,14 +96,44 @@ function concatDetails(json) {
     json
   }
 }
+// export function fetchDetails() {
+//   return dispatch => {
+//    return fetch('http://localhost:9000/ret', {
+// //    return fetch('/ret', {
+//       method: 'GET'})
+//       .then(res => {
+//         return res.json();
+//       })
+//       .then(json => dispatch(storeFetchedDetails(json)))
+//   };
+// }
+
 export function fetchDetails() {
   return dispatch => {
-   return fetch('http://localhost:9000/ret', {
-//    return fetch('/ret', {
-      method: 'GET'})
+   return fetch('http://localhost:9000/graphql', {
+      //    return fetch('/ret', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "query": `
+          query{
+            fetchDonorDetails{
+              name,
+              phonenumber,
+              location,
+              dishname,
+              imgurl,
+              description
+            }
+          }
+        `
+      })})
       .then(res => {
         return res.json();
       })
-      .then(json => dispatch(storeFetchedDetails(json)))
+      .then(json => {dispatch(storeFetchedDetails(json.data.fetchDonorDetails))})
   };
 }

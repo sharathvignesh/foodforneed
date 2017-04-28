@@ -1,5 +1,5 @@
 
-// server/app.js
+
 import express from 'express';
 const path = require('path');
 import GraphQLHTTP from 'express-graphql';
@@ -9,14 +9,15 @@ var bodyParser = require('body-parser');
 
 const app = express();
 var event = require('./../models/event');
-// Setup logger
+
 app.use(cors());
 app.use(bodyParser.json());
-// Serve static assets
 
-
-// Always return the main index.html, so react-router render the route in the client
-
+///////////////////////////////////
+//
+//  Without graphql
+//
+///////////////////////////////////
 app.post('/store', (req, res) => {
   let name = req.body.name;
   let phonenumber = req.body.phonenumber;
@@ -34,23 +35,27 @@ app.post('/store', (req, res) => {
     res.json(eventObj);
   });
 });
+// app.get('/ret', (req, res) => {
+//
+//   event.getDetails((err, detailsObj) => {
+//     if (err) {
+//       return res.status(500).send(err);
+//     }
+//     res.json(detailsObj);
+//   });
+// });
 
-
-
-app.get('/ret', (req, res) => {
-
-  event.getDetails((err, detailsObj) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.json(detailsObj);
-  });
-});
-
-app.use('/GraphQL', GraphQLHTTP({
-    schema,
+///////////////////////////////////
+//
+//  With graphql
+//
+///////////////////////////////////
+app.use('/graphql', GraphQLHTTP(req => {
+	return ({
+	  schema: schema,
+	  pretty: true,
     graphiql: true
-  })
-);
+	})
+}));
 
 module.exports = app;
