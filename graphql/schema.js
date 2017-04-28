@@ -11,7 +11,8 @@ import {
 } from 'graphql';
 
 import {
-  getDetails
+  getDetails,
+  save
 } from './../models/event';
 
 //
@@ -96,8 +97,32 @@ const query = new GraphQLObjectType({
   })
 });
 
+const mutation = new GraphQLObjectType({
+  name: 'RootMutationType',
+  fields: {
+    storeDonorDetails: {
+      type: Details,
+      description: 'A new donor',
+      args: {
+        name: {type: GraphQLString},
+        phonenumber: {type: GraphQLString},
+        location: {type: GraphQLString},
+        dishname: {type: GraphQLString},
+        imgurl: {type: GraphQLString},
+        description: {type: GraphQLString},
+        foodtype: {type: new GraphQLList(GraphQLString)}
+      },
+      resolve(val, {name, phonenumber, location, foodtype, dishname, imgurl, description}) {
+        console.log(name);
+        return save(name, phonenumber, location, foodtype, dishname, imgurl, description);
+      }
+    }
+  }
+});
+
 const schema = new GraphQLSchema({
-  query
+  query,
+  mutation
 });
 
 export default schema;

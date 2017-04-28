@@ -25,7 +25,7 @@ export function storeFoodType(foodtype) {
 
 export function storeDetails(name, phonenumber, location, foodtype, dishname, imgurl, description) {
   return dispatch => {
-    return fetch('/graphql', {
+    return fetch('http://localhost:9000/graphql', {
   //    return fetch('/store', {
       method: 'POST',
       headers: {
@@ -34,44 +34,39 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, im
       },
       body: JSON.stringify({
         'query': `
-        mutation storeDonorDetails(
-          $name: String!,
-          $phonenumber: String!,
-          $location: String!,
-          $foodtype: [String]!,
-          $dishname: String!,
-          $imgurl: String!,
-          $description: String!
-        ) {
-          storeDonorDetails(
-            name: $name,
-            phonenumber: $phonenumber,
-            location: $location,
-            foodtype: $foodtype,
-            dishname: $dishname,
-            imgurl: $imgurl,
-            description: $description
-          )
+        mutation insertFirstPost ($name: String!, $phonenumber: String!, $location: String!, $dishname: String!, $imgurl: String!, $description: String!, $foodtype: [String!]){
+        post: storeDonorDetails(
+          name: $name,
+          phonenumber: $phonenumber,
+          location: $location,
+          dishname: $dishname ,
+          imgurl: $imgurl,
+          description: $description,
+          foodtype: $foodtype
+        ){
+          name
+        }
         }
         `,
         "variables": {
           "name": name,
           "phonenumber": phonenumber,
           "location": location,
-          "foodtype": foodtype,
           "dishname": dishname,
           "imgurl": imgurl,
-          "description": description
+          "description": description,
+          "foodtype": foodtype
         }
       })})
-      .then(res => {
-        if (res.status !== 200) {
-          let status = res.status;
-          console.log('error in posting event');
-        }
-        return res.json();
-      })
-      .then(json => dispatch(concatDetails(json)))
+      .then(console.log("posted"))
+      // .then(res => {
+      //   if (res.status !== 200) {
+      //     let status = res.status;
+      //     console.log('error in posting event');
+      //   }
+      //   return res.json();
+      // })
+      // .then(json => dispatch(concatDetails(json)))
   };
   return dispatch => {
     return dispatch({
