@@ -25,7 +25,7 @@ export function storeFoodType(foodtype) {
 
 export function storeDetails(name, phonenumber, location, foodtype, dishname, imgurl, description) {
   return dispatch => {
-    return fetch('/graphql', {
+    return fetch('http://localhost:9000/graphql', {
   //    return fetch('/store', {
       method: 'POST',
       headers: {
@@ -34,34 +34,33 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, im
       },
       body: JSON.stringify({
         'query': `
-        mutation storeDonorDetails(
-          $name: String!,
-          $phonenumber: String!,
-          $location: String!,
-          $foodtype: [String]!,
-          $dishname: String!,
-          $imgurl: String!,
-          $description: String!
-        ) {
-          storeDonorDetails(
-            name: $name,
-            phonenumber: $phonenumber,
-            location: $location,
-            foodtype: $foodtype,
-            dishname: $dishname,
-            imgurl: $imgurl,
-            description: $description
-          )
+        mutation insertFirstPost ($name: String!, $phonenumber: String!, $location: String!, $dishname: String!, $imgurl: String!, $description: String!, $foodtype: [String!]){
+        post: storeDonorDetails(
+          name: $name,
+          phonenumber: $phonenumber,
+          location: $location,
+          dishname: $dishname ,
+          imgurl: $imgurl,
+          description: $description,
+          foodtype: $foodtype
+        ){
+          name,
+          phonenumber,
+          location,
+          dishname,
+          imgurl,
+          description
+        }
         }
         `,
         "variables": {
           "name": name,
           "phonenumber": phonenumber,
           "location": location,
-          "foodtype": foodtype,
           "dishname": dishname,
           "imgurl": imgurl,
-          "description": description
+          "description": description,
+          "foodtype": foodtype
         }
       })})
       .then(res => {
@@ -71,7 +70,7 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, im
         }
         return res.json();
       })
-      .then(json => dispatch(concatDetails(json)))
+      .then(json => {dispatch(concatDetails(json.data.post))})
   };
   return dispatch => {
     return dispatch({
@@ -96,14 +95,44 @@ function concatDetails(json) {
     json
   }
 }
+// export function fetchDetails() {
+//   return dispatch => {
+//    return fetch('http://localhost:9000/ret', {
+// //    return fetch('/ret', {
+//       method: 'GET'})
+//       .then(res => {
+//         return res.json();
+//       })
+//       .then(json => dispatch(storeFetchedDetails(json)))
+//   };
+// }
+
 export function fetchDetails() {
   return dispatch => {
-   return fetch('http://localhost:9000/ret', {
-//    return fetch('/ret', {
-      method: 'GET'})
+   return fetch('http://localhost:9000/graphql', {
+      //    return fetch('/ret', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "query": `
+          query{
+            fetchDonorDetails{
+              name,
+              phonenumber,
+              location,
+              dishname,
+              imgurl,
+              description
+            }
+          }
+        `
+      })})
       .then(res => {
         return res.json();
       })
-      .then(json => dispatch(storeFetchedDetails(json)))
+      .then(json => {dispatch(storeFetchedDetails(json.data.fetchDonorDetails))})
   };
 }

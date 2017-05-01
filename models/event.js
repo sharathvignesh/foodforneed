@@ -16,24 +16,20 @@ const EventSchema = new Schema({
 
 const Event = mongoose.model('Event', EventSchema);
 
-function save(name, phonenumber, location, foodtype, dishname, imgurl, description, callback) {
+function save(name, phonenumber, location, foodtype, dishname, imgurl, description) {
   Event.count({name: name, phonenumber: phonenumber, location: location, foodtype: foodtype, dishname: dishname, imgurl: imgurl, description: description}, (err, number) => {
     if (err) {
-      return callback(err);
-    }
-    if (number !== 0) {
-      return callback(name + ' is already registered.');
+      console.log("error");
+      return "error";
     }
     let event = new Event({name: name, phonenumber: phonenumber, location: location, foodtype: foodtype, dishname: dishname, imgurl: imgurl, description: description});
-    event.save(callback);
+    event.save();
   });
+  return {'name': name, 'phonenumber': phonenumber, 'location': location, 'dishname': dishname, 'imgurl': imgurl, 'description': description}
 }
 function getDetails(callback) {
   return Event.find(callback);
 }
-
-
-
 
 module.exports = {
   save: save,
