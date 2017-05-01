@@ -25,14 +25,11 @@ function save(name, phonenumber, location, foodtype, dishname, imgurl, descripti
     let event = new Event({name: name, phonenumber: phonenumber, location: location, foodtype: foodtype, dishname: dishname, imgurl: imgurl, description: description});
     event.save();
   });
-  return "success"
+  return {'name': name, 'phonenumber': phonenumber, 'location': location, 'dishname': dishname, 'imgurl': imgurl, 'description': description}
 }
 function getDetails(callback) {
   return Event.find(callback);
 }
-
-
-
 
 module.exports = {
   save: save,

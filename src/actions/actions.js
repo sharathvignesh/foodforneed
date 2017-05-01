@@ -44,7 +44,12 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, im
           description: $description,
           foodtype: $foodtype
         ){
-          name
+          name,
+          phonenumber,
+          location,
+          dishname,
+          imgurl,
+          description
         }
         }
         `,
@@ -58,15 +63,14 @@ export function storeDetails(name, phonenumber, location, foodtype, dishname, im
           "foodtype": foodtype
         }
       })})
-      .then(console.log("posted"))
-      // .then(res => {
-      //   if (res.status !== 200) {
-      //     let status = res.status;
-      //     console.log('error in posting event');
-      //   }
-      //   return res.json();
-      // })
-      // .then(json => dispatch(concatDetails(json)))
+      .then(res => {
+        if (res.status !== 200) {
+          let status = res.status;
+          console.log('error in posting event');
+        }
+        return res.json();
+      })
+      .then(json => {dispatch(concatDetails(json.data.post))})
   };
   return dispatch => {
     return dispatch({

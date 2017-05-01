@@ -113,7 +113,6 @@ const mutation = new GraphQLObjectType({
         foodtype: {type: new GraphQLList(GraphQLString)}
       },
       resolve(val, {name, phonenumber, location, foodtype, dishname, imgurl, description}) {
-        console.log(name);
         return save(name, phonenumber, location, foodtype, dishname, imgurl, description);
       }
     }
